@@ -8,5 +8,8 @@
         public int Count { get; set; }
         public string Description { get; set; } = string.Empty;
         public string SearchByTag { get; set; } = string.Empty;
-    }
+		public DateTime CreateAt { get; set; }
+		public DateTime? UpdateAt { get; set; }
+
+	}
 }

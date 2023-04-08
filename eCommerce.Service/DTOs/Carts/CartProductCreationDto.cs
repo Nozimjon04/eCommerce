@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace eCommerce.Service.DTOs.Charts
 {
-    public class ChartProductCreationDto
+    public class CartProductCreationDto
     {
         [Required]
         public long CartId { get; set; }
