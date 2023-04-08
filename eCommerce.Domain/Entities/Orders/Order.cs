@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eCommerce.Domain.Commons;
+using eCommerce.Domain.Enums;
 
-namespace eCommerce.Domain.Entities.Orders
+namespace eCommerce.Domain.Entities
 {
-    internal class Order
+    public class Order : Auditable
     {
+        public long UserId { get; set; }
+        public User User { get; set; } = default!;
+        public OrderStatus Status { get; set; } = OrderStatus.Pending;
+        public decimal TotalPrice { get; set; }
     }
 }

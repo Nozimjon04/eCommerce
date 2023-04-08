@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eCommerce.Domain.Commons;
 
 namespace eCommerce.Domain.Entities.Carts
 {
-    internal class CartProduct
+    public class CartProduct : Auditable
     {
+        public long CartId { get; set; }
+        public Cart Cart { get; set; } = default!;
+        public long ProductId { get; set; }
+        public Product Product { get; set; } = default!;
     }
 }

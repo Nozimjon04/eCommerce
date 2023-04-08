@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eCommerce.Domain.Commons;
+using System.Reflection.PortableExecutable;
 
-namespace eCommerce.Domain.Entities.Products
+namespace eCommerce.Domain.Entities;
+
+public class Product : Auditable
 {
-    internal class Product
-    {
-    }
+    public string Name { get; set; } = string.Empty;
+    public decimal Price { get; set; }
+    public int Count { get; set; }
+    public string Description { get; set; } = string.Empty;
+    public string SearchByTag { get; set; } = string.Empty; 
+
+
 }
