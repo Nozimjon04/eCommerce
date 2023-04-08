@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eCommerce.Domain.Commons;
 
-namespace eCommerce.Domain.Entities.Orders
+namespace eCommerce.Domain.Entities.Orders;
+
+public class OrderComments : Auditable
 {
-    internal class OrderComments
-    {
-    }
+    public long UserId { get; set; }
+    public User User { get; set; } = default!;
+    public long OrderId { get; set; }
+    public Order Order { get; set; } = default!;
+
+    // To leave Comment
+    public string Commet { get; set; } = string.Empty;
 }

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eCommerce.Domain.Commons;
 
-namespace eCommerce.Domain.Entities.Products
+namespace eCommerce.Domain.Entities.Products;
+
+public class ProductComment : Auditable
 {
-    internal class ProductComment
-    {
-    }
+    public long UserId { get; set; }
+    public User User { get; set; } = default!;
+    public long ProductId { get; set; }
+    public Product Prdduct { get; set; }
+
+    public string Comment { get; set; } = string.Empty;
 }
