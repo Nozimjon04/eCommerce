@@ -13,7 +13,6 @@ namespace eCommerce.Service.DTOs.Products
         [DisplayName("Product Id")]
 
         public long ProductId { get; set; }
-        [Required]
         [DisplayName("Comment")]
 
         public string Comment { get; set; } = string.Empty;

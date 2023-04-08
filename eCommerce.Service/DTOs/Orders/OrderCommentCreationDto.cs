@@ -14,7 +14,6 @@ namespace eCommerce.Service.DTOs.Orders
 
         public long OrderId { get; set; }
 
-        [Required(ErrorMessage = "Please Enter Comment")]
         [DisplayName("Comment")]
         public string Comment { get; set; } = string.Empty;
     }
