@@ -10,5 +10,5 @@ public class OrderComments : Auditable
     public Order Order { get; set; } = default!;
 
     // To leave Comment
-    public string Commet { get; set; } = string.Empty;
+    public string Comment { get; set; } = string.Empty;
 }
