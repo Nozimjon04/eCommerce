@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace eCommerce.Service.Interfaces;
 
-namespace eCommerce.Service.Interfaces
+public interface IProductCommentService
 {
-	internal class IProductCommentService
-	{
-	}
 }
