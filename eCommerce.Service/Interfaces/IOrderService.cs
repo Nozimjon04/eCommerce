@@ -1,4 +1,4 @@
-﻿using eCommerce.Service.DTOs.Order;
+﻿using eCommerce.Service.DTOs.Orders;
 using System.Linq.Expressions;
 
 namespace eCommerce.Service.Interfaces;
