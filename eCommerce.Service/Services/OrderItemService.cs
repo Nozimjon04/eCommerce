@@ -3,47 +3,91 @@ using eCommerce.Data.IRepositories;
 using eCommerce.Domain.Entities;
 using eCommerce.Domain.Entities.Orders;
 using eCommerce.Service.DTOs.Orders;
+using eCommerce.Service.Exceptions;
 using eCommerce.Service.Interfaces;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 
 namespace eCommerce.Service.Services;
 
-public class OrderItemService:IOrderItemService
+public class OrderItemService: IOrderItemService
 {
-	private readonly IRepository<OrderItem> orderItemRepository;
-	private readonly IRepository<Order> orderRepository;
-	private readonly IRepository<Product> productRepository;
+	private readonly IRepository<OrderItem> repository;
+	private readonly IOrderService orderService;
+	private readonly IProductService productService;
 	private readonly IMapper mapper;
-	public OrderItemService(IRepository<OrderItem> orderItemRepo, IRepository<Order> orderRepository, IRepository<Product> productRepository,IMapper mapper)
+	public OrderItemService(IRepository<OrderItem> repository,
+			IMapper mapper,
+			IOrderService orderService,
+			IProductService productService)
+		{
+			this.repository = repository;
+			this.mapper = mapper;
+			this.orderService = orderService;
+			this.productService = productService;
+		}
+
+	public async Task<OrderItem> AddAsync(OrderItemCreationDto dto)
 	{
-		this.orderItemRepository = orderItemRepo;
-		this.orderRepository = orderRepository;
-		this.productRepository = productRepository;
-		this.mapper = mapper;
+		var order = await this.orderService.GetAsync(order => order.Id == dto.OrderId);
+		var product = await this.productService.GetAsync(product => product.Id == dto.ProductId);
+
+		if (order is null || product is null)
+		{
+			throw new CustomException(400, "No matching Product or Order	");
+		}
+        return this.mapper.Map<OrderItem>(dto);
+    }
+
+    public async Task<bool> DelateAsync(Expression<Func<OrderItem,bool>> expression)
+	{
+		var isDeleted = await this.repository.DeleteAsync(expression);
+		if (isDeleted is false)
+            throw new CustomException(400, "No Matching ");
+
+		var res = await this.repository.DeleteAsync(expression);
+		await this.repository.SaveAsync();
+
+		return res;
+    }
+
+    public async Task<IEnumerable<OrderItem>> GetAllAsync()
+	{
+		var items =  this.repository.SelectAllAsync();
+		if (items is null)
+			throw new CustomException(404, "Items not found");
+
+		var mappedItem = this.mapper.Map<IEnumerable<OrderItem>>(items);
+		return mappedItem;
 	}
 
-	public async Task<Order> AddAsync(OrderItemCreationDto orderItemCreationDto)
+	public async Task<OrderItem> GetAsync(Expression<Func<OrderItem,bool>> expression)
 	{
-		throw new NotImplementedException();
-	}
+		var item = await this.repository.SelectAsync(expression);
+		if(item is null)
+            throw new CustomException(404, "Item not found");
 
-	public Task<bool> DelateAsync(Expression<Func<OrderItemCreationDto>> expression)
-	{
-		throw new NotImplementedException();
-	}
+		var result = this.mapper.Map<OrderItem>(item);
+		return result;
+    }
 
-	public Task<IEnumerable<Order>> GetAllAsync(Expression<Func<OrderItem>> expression)
+	public async Task<OrderItem> UpdateAsync(Expression<Func<OrderItem, bool>> expression, OrderItemCreationDto dto)
 	{
-		throw new NotImplementedException();
-	}
+		var selected = await this.repository.SelectAsync(expression);
+		if (selected is null)
+            throw new CustomException(404, "Item not found");
 
-	public Task<Order> GetAsync(Expression<Func<OrderItemCreationDto>> expression)
-	{
-		throw new NotImplementedException();
-	}
+		try
+		{
+			var result = this.mapper.Map<OrderItem>(selected);
+			var res = await this.repository.UpdateAsync(result);
+			return res;
+		}
+		catch 
+		{
+            throw new CustomException(500, "Something went wrong");
+        }
+    }
 
-	public Task<Order> UpdateAsync(Expression<Func<OrderItemCreationDto, bool>> expression)
-	{
-		throw new NotImplementedException();
-	}
+
 }
