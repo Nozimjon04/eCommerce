@@ -10,7 +10,7 @@ public interface IPaymentService
 	public Task<Payment> UpdateAsync(Expression<Func<Payment, bool>> expression,PaymentCreationDto payment);
 	public Task<bool> DelateAsync(Expression<Func<Payment, bool>> expression);
 	public Task<Payment> GetAsync(Expression<Func<Payment, bool>> expression);
-	public Task<IQueryable<Payment>> GetAllAsync();
+	public Task<IEnumerable<Payment>> GetAllAsync();
 
 
 }
