@@ -46,7 +46,7 @@ namespace eCommerce.Service.Services
         {
             var isDeleted = await this.repository.DeleteAsync(expression);
             if (isDeleted is false)
-                throw new CustomException(400, " Order is not found");
+                throw new CustomException(404, " Order is not found");
 
             var result = await this.repository.DeleteAsync(expression);
             await this.repository.SaveAsync();
