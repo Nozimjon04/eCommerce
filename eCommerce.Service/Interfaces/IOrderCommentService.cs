@@ -1,4 +1,4 @@
-﻿using eCommerce.Service.DTOs.Order;
+﻿using eCommerce.Service.DTOs.Orders;
 
 namespace eCommerce.Service.Interfaces;
 
