@@ -8,15 +8,17 @@ using eCommerce.Data.Repositories;
 using eCommerce.Domain.Entities.Products;
 using eCommerce.Domain.Entities.Orders;
 using eCommerce.Domain.Entities.Carts;
+using eCommerce.Service.Interfaces;
+using eCommerce.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-#region repositories added
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("eCommerce")));
+#region repositories added
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped<IRepository<User>,Repository<User>>();
 builder.Services.AddScoped<IRepository<Product>,Repository<Product>>();
@@ -28,6 +30,13 @@ builder.Services.AddScoped<IRepository<Cart>,Repository<Cart>> ();
 builder.Services.AddScoped<IRepository<CartProduct>,Repository<CartProduct>> ();
 builder.Services.AddScoped<IRepository<OrderItem>,Repository<OrderItem>> ();
 #endregion
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductCommentService, ProductCommentService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderItemService, OrderItemService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
