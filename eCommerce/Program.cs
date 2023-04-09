@@ -26,9 +26,9 @@ builder.Services.AddScoped<IRepository<Order>, Repository<Order>> ();
 builder.Services.AddScoped<IRepository<OrderComments>, Repository<OrderComments>>();
 builder.Services.AddScoped<IRepository<Cart>,Repository<Cart>> ();
 builder.Services.AddScoped<IRepository<CartProduct>,Repository<CartProduct>> ();
-var app = builder.Build();
-
+builder.Services.AddScoped<IRepository<OrderItem>,Repository<OrderItem>> ();
 #endregion
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
