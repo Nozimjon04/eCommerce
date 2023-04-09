@@ -2,7 +2,7 @@
 using eCommerce.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace eCommerce.Service.DTOs.Orders
+namespace eCommerce.Service.DTOs.Orders 
 {
     public class OrderCreationDto
     {
