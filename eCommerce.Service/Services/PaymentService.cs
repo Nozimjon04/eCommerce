@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using eCommerce.Data.IRepositories;
+using eCommerce.Domain.Entities;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace eCommerce.Service.Services
+namespace eCommerce.Service.Services;
+
+public class PaymentService
 {
-    internal class PaymentService
-    {
-    }
+    private readonly IRepository<Payment> repository;
+    private readonly IMapper mapper;
+
+   
 }

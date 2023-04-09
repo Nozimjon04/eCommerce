@@ -20,8 +20,7 @@ namespace eCommerce.Service.Services
         }
         public async Task<UserForResultDto> CreateAsync(UserCreationDto userCreationDto)
         {
-            var user = await this.repository.SelectAsync( user => user.FirstName.ToLower() == userCreationDto.FirstName.ToLower()
-            && user.LastName.ToLower() == userCreationDto.LastName.ToLower());
+            var user = await this.repository.SelectAsync( user => user.Email.ToLower() == userCreationDto.Email.ToLower();
 
             if (user is not null)
                 throw new CustomException(400, "User Already exists");
@@ -96,7 +95,9 @@ namespace eCommerce.Service.Services
 
             try
             {
+                userToUpdate.UpdatedAt = DateTime.UtcNow;
                 var updated = await this.repository.UpdateAsync(userToUpdate);
+                
                 await this.repository.SaveAsync();
                 var result = this._mapper.Map<UserForResultDto>(updated);
 
