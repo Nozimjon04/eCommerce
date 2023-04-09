@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace eCommerce.Service.DTOs.Payments
 {
-    internal class PaymentCreationDto
+    public class PaymentCreationDto
     {
         [Required]
         public long UserId { get; set; }
