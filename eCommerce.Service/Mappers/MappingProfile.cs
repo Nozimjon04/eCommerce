@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using eCommerce.Domain.Entities;
-
+using eCommerce.Service.DTOs.Order;
 using eCommerce.Service.DTOs.Products;
 using eCommerce.Service.DTOs.Users;
 
@@ -16,6 +16,7 @@ public class MappingProfile:Profile
 		CreateMap<productForResultDto,Product>().ReverseMap();
 		CreateMap<IEnumerable<Product>, productForResultDto>().ReverseMap();
         CreateMap<UserCreationDto, User>().ReverseMap();
+		CreateMap<Order,OrderCreationDto>().ReverseMap();
 
 	}
     

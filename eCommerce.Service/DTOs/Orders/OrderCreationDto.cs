@@ -8,6 +8,7 @@ namespace eCommerce.Service.DTOs.Order
     {
         [Required]
         public long UserId { get; set; }
+        public bool isPaid { get; set; }
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
         [Required]
         public decimal TotalPrice { get; set; }

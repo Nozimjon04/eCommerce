@@ -44,7 +44,7 @@ namespace eCommerce.Service.Services
         public async Task<bool> DeleteAsync(Expression<Func<User, bool>> expression)
         {
             var isDeleted = await this.repository.DeleteAsync(expression);
-            if (!isDeleted)
+            if (isDeleted is false)
                 throw new CustomException(404, "User not found");
 
             await this.repository.SaveAsync();
