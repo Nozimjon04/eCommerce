@@ -1,6 +1,6 @@
 ﻿namespace eCommerce.Domain.Enums;
 
-public enum OrderStatus
+public enum OrderStatus : byte
 {
     Pending,
     Picking,
