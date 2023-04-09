@@ -5,9 +5,10 @@ namespace eCommerce.Service.DTOs.Orders;
 
 public class OrderItemCreationDto
 {
-	public bool isPaid { get; set; }=false;
-	public long UserId { get; set; }
-	public User User { get; set; } = default!;
-	public OrderStatus Status { get; set; } = OrderStatus.Pending;
-	public decimal TotalPrice { get; set; }
+	public long OrderId { get; set; }
+	public Order order { get; set; }
+	public long ProductId { get; set; }
+	public Product Product { get; set; }
+	public int ProductCount { get; set; }
+	public decimal ProductPrice { get; set; }
 }

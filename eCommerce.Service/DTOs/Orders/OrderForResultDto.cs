@@ -1,7 +1,7 @@
 ﻿using eCommerce.Domain.Entities;
 using eCommerce.Domain.Enums;
 
-namespace eCommerce.Service.DTOs.Order
+namespace eCommerce.Service.DTOs.Orders
 {
     public class OrderForResultDto
     {
