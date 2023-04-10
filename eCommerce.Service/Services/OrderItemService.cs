@@ -3,7 +3,8 @@ using eCommerce.Data.IRepositories;
 using eCommerce.Domain.Entities;
 using eCommerce.Domain.Entities.Orders;
 using eCommerce.Service.DTOs.Orders;
-using eCommerce.Service.DTOs.Orders;
+
+using eCommerce.Service.Exceptions;
 using eCommerce.Service.Interfaces;
 using System.Linq.Expressions;
 
@@ -13,14 +14,20 @@ public class OrderItemService:IOrderItemService
 {
 	private readonly IRepository<OrderItem> OrderItemRepo;
 	private readonly IMapper mapper;
-	public OrderItemService(IRepository<OrderItem> orderItemRepo, IMapper mapper)
+	private readonly IOrderService orderService;
+	private readonly IProductService productService;
+	public OrderItemService(IRepository<OrderItem> orderItemRepo, IMapper mapper, IOrderService orderService, IProductService productService)
 	{
-		OrderItemRepo = orderItemRepo;
+		this.OrderItemRepo = orderItemRepo;
 		this.mapper = mapper;
+		this.orderService = orderService;
+		this.productService = productService;
 	}
 
-	public Task<Order> AddAsync(OrderItemCreationDto orderItemCreationDto)
+	public async Task<Order> AddAsync(OrderItemCreationDto orderItemCreationDto)
 	{
+	
+		
 		throw new NotImplementedException();
 	}
 
