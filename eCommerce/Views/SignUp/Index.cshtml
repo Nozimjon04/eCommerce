@@ -1,0 +1,79 @@
+﻿@using eCommerce.Service.DTOs.Users;
+@{
+    ViewData["Title"] = "User";
+}
+
+@model UserCreationDto
+
+<style>
+    body {
+        background-color: #f8f9fa; 
+    }
+
+    h2 {
+        color: #007bff; 
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    form {
+        background-color: #ffffff; 
+        padding: 2rem;
+        border-radius: 0.25rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); 
+    }
+
+    label{
+        color: #333333; 
+        font-weight: bold;
+    }
+
+    input.form-control {
+        margin-bottom: 1rem;
+    }
+
+    button.btn-primary {
+        background-color: #007bff; 
+        border-color: #007bff;
+        color: #ffffff;
+        font-weight: bold;
+        width: 100%;
+    }
+
+        button.btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h2>Signup</h2>
+
+            <form method="post" action="/Account/Signup">
+                <div class="form-group">
+                    <label for="FirstName">First Name</label>
+                    <input type="text" id="FirstName" name="FirstName" class="form-control" value="" />
+                </div>
+
+                <div class="form-group">
+                    <label for="LastName">Last Name</label>
+                    <input type="text" id="LastName" name="LastName" class="form-control" value="" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input type="email" id="Email" name="Email" class="form-control" value="" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Password">Password</label>
+                    <input type="password" id="Password" name="Password" class="form-control" value="" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Signup</button>
+            </form>
+        </div>
+    </div>
+</div>
