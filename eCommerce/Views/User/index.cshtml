@@ -1,0 +1,11 @@
+﻿@using eCommerce.Service.DTOs.Users;
+@{
+    ViewData["Title"] = "User";
+}
+
+@model List<UserForResultDto>
+
+    @foreach(var i in Model)
+    {
+        <p>@i.FirstName</p>
+    }

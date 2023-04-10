@@ -2,7 +2,7 @@
 
 namespace eCommerce.Domain.Entities.Orders;
 
-public class OrderItem:Auditable
+public class OrderItem : Auditable
 {
 	public long OrderId { get; set; }
  	public Order Order { get; set; }

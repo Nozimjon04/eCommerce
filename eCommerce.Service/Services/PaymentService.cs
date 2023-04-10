@@ -18,7 +18,7 @@ public class PaymentService : IPaymentService
 
     public PaymentService(IMapper mapper,IRepository<Payment> 
         repository,IOrderService orderService,
-        UserService userService)
+        IUserService userService)
     {
         this.mapper = mapper;
         this.orderService = orderService;
