@@ -20,29 +20,28 @@ public class ProductService : IProductService
 
 	public async Task<productForResultDto> AddAsync(ProductCreationDto productCreationDto)
 	{
-		var entities = productRepo.SelectAllAsync().ToList();	
-		var entity=entities.FirstOrDefault(p=> p.Name.ToLower() == productCreationDto.Name.ToLower());
+		var entity=await productRepo.SelectAsync(e=>e.Name.ToLower()==productCreationDto.Name.ToLower());
 		if(entity is not null)
 		{
 			entity.Count += productCreationDto.Count;
 			await productRepo.SaveAsync();
 		}
-		var result= await productRepo.InsertAsync(entity);
+		var result= this.mapper.Map<Product>(productCreationDto);
 		result.CreatedAt = DateTime.UtcNow;
+		await productRepo.InsertAsync(result);
 		await productRepo.SaveAsync();
-		var mappedModel=mapper.Map<productForResultDto>(result);
-		return mappedModel;
+		
+		return mapper.Map<productForResultDto>(result);
 	}
 
 	public async Task<bool> DelateAsync(Expression<Func<Product, bool>> expression)
 	{
-		var products=productRepo.SelectAllAsync().ToList();
-		var product=products.FirstOrDefault(p=>p.Name.ToLower() == expression.Name.ToLower());
+		
+		var product = await productRepo.SelectAsync(p => p.Name.ToLower() == expression.Name.ToLower());
 		if(product is null)
 		{
 			throw new CustomException(404, "Product is not found");
-		}
-		
+		}		
 		await productRepo.DeleteAsync(expression);
 		await productRepo.SaveAsync();
 		return true;
@@ -73,12 +72,9 @@ public class ProductService : IProductService
 		{
 			throw new CustomException(404, "product is not found");
 		}
-		entity.Name= dto.Name;
-		entity.Description= dto.Description;
-		entity.Price= dto.Price;
-		entity.UpdatedAt = DateTime.UtcNow;
-		entity.SearchByTag = dto.SearchByTag;
-		await productRepo.UpdateAsync(entity);
+		var res = this.mapper.Map<Product>(dto);
+		res.UpdatedAt= DateTime.UtcNow;
+		await productRepo.UpdateAsync(res);
 		await productRepo.SaveAsync();
 		return mapper.Map<productForResultDto>(entity);
 	}

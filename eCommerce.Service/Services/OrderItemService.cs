@@ -6,7 +6,7 @@ using eCommerce.Service.DTOs.Orders;
 using eCommerce.Service.Exceptions;
 using eCommerce.Service.Interfaces;
 using System.Linq.Expressions;
-using System.Text.RegularExpressions;
+
 
 namespace eCommerce.Service.Services;
 
@@ -16,6 +16,7 @@ public class OrderItemService: IOrderItemService
 	private readonly IOrderService orderService;
 	private readonly IProductService productService;
 	private readonly IMapper mapper;
+
 	public OrderItemService(IRepository<OrderItem> repository,
 			IMapper mapper,
 			IOrderService orderService,
@@ -36,7 +37,16 @@ public class OrderItemService: IOrderItemService
 		{
 			throw new CustomException(400, "No matching Product or Order	");
 		}
-        return this.mapper.Map<OrderItem>(dto);
+		else if (order is not null && product is not null)
+		{
+			var result=this.mapper.Map<OrderItem>(dto);
+			result.CreatedAt = DateTime.UtcNow;
+			await this.repository.InsertAsync(result);
+			await this.repository.SaveAsync();
+			return result;
+
+		}
+		throw new CustomException(500, "something went wrong");
     }
 
     public async Task<bool> DelateAsync(Expression<Func<OrderItem,bool>> expression)
@@ -45,10 +55,9 @@ public class OrderItemService: IOrderItemService
 		if (isDeleted is false)
             throw new CustomException(400, "No Matching ");
 
-		var res = await this.repository.DeleteAsync(expression);
 		await this.repository.SaveAsync();
 
-		return res;
+		return isDeleted;
     }
 
     public async Task<IEnumerable<OrderItem>> GetAllAsync()
@@ -67,6 +76,7 @@ public class OrderItemService: IOrderItemService
 		if(item is null)
             throw new CustomException(404, "Item not found");
 
+
 		var result = this.mapper.Map<OrderItem>(item);
 		return result;
     }
@@ -80,7 +90,9 @@ public class OrderItemService: IOrderItemService
 		try
 		{
 			var result = this.mapper.Map<OrderItem>(selected);
+			result.UpdatedAt = DateTime.UtcNow;
 			var res = await this.repository.UpdateAsync(result);
+			await this.repository.SaveAsync();
 			return res;
 		}
 		catch 
