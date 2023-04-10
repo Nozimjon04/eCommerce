@@ -2,7 +2,7 @@
 
 namespace eCommerce.Service.DTOs.Charts
 {
-    public class ChartCreationDto
+    public class CartCreationDto
     {
         [Required]
         public long UserId { get; set; }

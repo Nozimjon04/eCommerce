@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eCommerce.Domain.Entities.Orders;
+using eCommerce.Service.DTOs.Orders;
+using System.Linq.Expressions;
 
-namespace eCommerce.Service.Interfaces
+namespace eCommerce.Service.Interfaces;
+
+public interface IOrderCommentService
 {
-	internal class IOrderCommentService
-	{
-	}
+	public Task<OrderCommentResultDto> LeaveComment(OrderCommentCreationDto orderCommentCreationDto);
+	public Task<OrderCommentResultDto> ReplyComment(string comment, OrderCommentCreationDto orderCommentCreationDto);
+	public Task<bool> DelateAsync(Expression<Func<OrderComments, bool>> expression);
 }

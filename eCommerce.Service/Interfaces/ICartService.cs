@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eCommerce.Domain.Entities.Carts;
+using eCommerce.Service.DTOs.Charts;
+using System.Linq.Expressions;
 
-namespace eCommerce.Service.Interfaces
+namespace eCommerce.Service.Interfaces;
+
+public interface ICartService
 {
-	internal class ICartService
-	{
-	}
+    Task<bool> AddAsync(CartCreationDto cartCreationDto);
+    Task<bool> UpdateAsync(int id, CartForResultDto cartForResultDto);
+    Task<bool> DelateAsync(Expression<Func<Cart, bool>> expression);
+    Task<Cart> GetAsync(Expression<Func<Cart, bool>> expression = null!);
+    Task<IEnumerable<Cart>> GetAllAsync(Expression<Func<Cart, bool>> expression = null!);
 }

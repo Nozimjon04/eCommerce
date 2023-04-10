@@ -2,7 +2,88 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #007bff; 
+    }
+
+    .login-form {
+        width: 300px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 5px;
+    }
+
+        .login-form h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .login-form p {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-form input[type="email"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .login-form button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+            .login-form button[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+
+        .login-form a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+    .login-container {
+        background-color: #ffffff; /* Set background color for login container */
+        padding: 20px; /* Add padding to login container */
+        margin-top: 100px; /* Add margin from top */
+        max-width: 400px; /* Set maximum width for login container */
+        margin-left: auto; /* Center align login container horizontally */
+        margin-right: auto;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add shadow effect */
+    }
+
+    .login-page {
+        background-image: url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fpng.pngtree.com%2Fthumb_back%2Ffh260%2Fbackground%2F20210804%2Fpngtree-modern-simple-elegant-beautiful-color-website-landing-page-background-image_757350.jpg&tbnid=irBaKeLdPdMOlM&vet=12ahUKEwjT6MjJr57-AhUKyioKHdyFBGYQMygvegUIARDGAg..i&imgrefurl=https%3A%2F%2Fpngtree.com%2Ffree-backgrounds-photos%2Fwebsite&docid=fgQSqeZbgbcKQM&w=364&h=260&q=website%20page%20background%20images&ved=2ahUKEwjT6MjJr57-AhUKyioKHdyFBGYQMygvegUIARDGAg"); /* Set background image */
+        background-size: cover; 
+        filter: blur(5px); 
+         or use box-shadow for shadow effect ;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+</style>
+
+<div class="container">
+    <div class="login-form">
+        <h1>Login</h1>
+        <p>Please enter your email and password to log in.</p>
+        <form>
+            <input type="email" class="form-control" id="email" placeholder="Email">
+            <input type="password" class="form-control" id="password" placeholder="Password">
+            <button type="submit" class="btn btn-primary">Log in</button>
+        </form>
+        <p class="mt-3">Don't have an account? <a href="/signup">Sign up</a></p>
+    </div>
 </div>
