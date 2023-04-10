@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Product";
 }
-@model List<productForResultDto>
 
 
 
@@ -71,15 +70,15 @@
                 <div class="col-md-4">
                     <div class="product-container">
                         <h4>@product.Name</h4>
-                        <p class="price">$@product.Price</p>
-                        <p class="count">In stock: @product.Count</p>
-                        <p class="description">@product.Description</p>
+                        <p class="price">$</p>
+                        <p class="count">In stock: </p>
+                        <p class="description"></p>
                         <div class="tags">
-                            <strong>Tags:</strong> @product.SearchByTag
+                            <strong>Tags:</strong> 
                         </div>
                         <div class="search-by-tag">
                             <form asp-action="SearchByTag" asp-controller="Product" method="get">
-                                <input type="hidden" name="tag" value="@product.SearchByTag" />
+                                <input type="hidden" name="tag" value="" />
                                 <button type="submit" class="btn btn-link btn-sm">Search by Tag</button>
                             </form>
                         </div>
