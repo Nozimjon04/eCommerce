@@ -48,7 +48,7 @@ public class ProductService : IProductService
 		return true;
 	}
 
-	public async Task<IEnumerable<Product>> GetAllAsync(Expression<Func<Product, bool>> expression=null)
+	public async Task<IEnumerable<Product>> GetAllAsync()
 	
 		=> productRepo.SelectAllAsync();
 		

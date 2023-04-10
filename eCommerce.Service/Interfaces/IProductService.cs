@@ -10,5 +10,5 @@ public interface IProductService
 	public Task<productForResultDto> UpdateAsync(Expression<Func<Product, bool>> expression,ProductCreationDto dto);
 	public Task<bool> DelateAsync(Expression<Func<Product, bool>> expression);
 	public Task<productForResultDto> GetAsync(Expression<Func<Product,bool>> expression);
-	public Task<IEnumerable<Product>> GetAllAsync(Expression<Func<Product,bool>> expression);
+	public Task<IEnumerable<productForResultDto>> GetAllAsync();
 }
