@@ -7,9 +7,9 @@ namespace eCommerce.Service.Interfaces;
 
 public interface IOrderItemService
 {
-	public Task<Order> AddAsync(OrderItemCreationDto orderItemCreationDto);
-	public Task<Order> UpdateAsync(Expression<Func<OrderItemCreationDto, bool>> expression);
-	public Task<bool> DelateAsync(Expression<Func<OrderItemCreationDto>> expression);
-	public Task<Order> GetAsync(Expression<Func<OrderItemCreationDto>> expression);
-	public Task<IEnumerable<Order>> GetAllAsync(Expression<Func<OrderItem>> expression);
+	public Task<OrderItem> AddAsync(OrderItemCreationDto orderItemCreationDto);
+	public Task<OrderItem> UpdateAsync(Expression<Func<OrderItem, bool>> expression, OrderItemCreationDto orderItemCreationDto);
+	public Task<bool> DelateAsync(Expression<Func<OrderItem, bool>> expression);
+	public Task<OrderItem> GetAsync(Expression<Func<OrderItem,bool>> expression);
+	public Task<IEnumerable<OrderItem>> GetAllAsync();
 }

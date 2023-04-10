@@ -18,6 +18,7 @@ public class MappingProfile:Profile
 		CreateMap<productForResultDto,Product>().ReverseMap();
 		CreateMap<IEnumerable<Product>, productForResultDto>().ReverseMap();
         CreateMap<UserCreationDto, User>().ReverseMap();
+		CreateMap<User, UserForResultDto>().ReverseMap();
 		CreateMap<Order,OrderCreationDto>().ReverseMap();
 		CreateMap<OrderItem, OrderItemCreationDto>().ReverseMap();
 

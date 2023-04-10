@@ -11,24 +11,31 @@ using eCommerce.Domain.Entities.Carts;
 using eCommerce.Service.Interfaces;
 using eCommerce.Service.Services;
 
+
+using eCommerce.Extensions;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
-	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("eCommerce")));
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+	b => b.MigrationsAssembly("eCommerce.Data")));
+
 #region repositories added
+
+	
+
 builder.Services.AddAutoMapper(typeof(MappingProfile));
-builder.Services.AddScoped<IRepository<User>,Repository<User>>();
-builder.Services.AddScoped<IRepository<Product>,Repository<Product>>();
-builder.Services.AddScoped < IRepository < ProductComment >, Repository < ProductComment >> ();
-builder.Services.AddScoped<IRepository<Payment>, Repository<Payment>> ();
-builder.Services.AddScoped<IRepository<Order>, Repository<Order>> ();
-builder.Services.AddScoped<IRepository<OrderComments>, Repository<OrderComments>>();
-builder.Services.AddScoped<IRepository<Cart>,Repository<Cart>> ();
-builder.Services.AddScoped<IRepository<CartProduct>,Repository<CartProduct>> ();
-builder.Services.AddScoped<IRepository<OrderItem>,Repository<OrderItem>> ();
+
+//Extension method for DI contiener to store All Repositories
+builder.Services.AddRepositories();
+
+//Extension method for DI contiener to store All Service
+builder.Services.AddCustomServices();
+
 #endregion
 
 builder.Services.AddScoped<IUserService, UserService>();
