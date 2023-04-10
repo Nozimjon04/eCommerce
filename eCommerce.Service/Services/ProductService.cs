@@ -47,13 +47,22 @@ public class ProductService : IProductService
 		return true;
 	}
 
-	public async Task<IEnumerable<Product>> GetAllAsync(Expression<Func<Product, bool>> expression=null)
-	
-		=> productRepo.SelectAllAsync();
-		
-	
+	public async Task<IEnumerable<productForResultDto>> GetAllAsync()
+	{
+		var products = this.productRepo.SelectAllAsync();
+			
+		if (products is null)
+            throw new CustomException(404, "Products is not found");
 
-	public async Task<productForResultDto> GetAsync(Expression<Func<Product, bool>> expression)
+		var result = this.mapper.Map<IEnumerable<productForResultDto>>(products);
+		return result;
+    }
+
+
+
+
+
+    public async Task<productForResultDto> GetAsync(Expression<Func<Product, bool>> expression)
 	{
 		var entity=await productRepo.SelectAsync(expression);
 		if(entity is null)
